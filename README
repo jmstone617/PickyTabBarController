@@ -1,0 +1,16 @@
+Version 1.0:
+
+This class is a very simple subclass of UITabBarController. The impetus behind this class arose when I was working on a project in which I needed a view hierarchy such as this:
+
+UITabBarController
+	- UINavigationController
+		- UIViewController
+	- UINavigationController
+		- UIViewController
+			- UIViewController
+	- UINavigationController
+		- UIViewController
+
+The issue was in some cases, my UIViewController should support landscape mode, but in other cases only portrait. The standard Apple UITabBarController is an all-or-nothing situation. Either every view controller supports all orientations, or they all support none. This is intended to be very much of a plug-and-play type of subclass. Simply import PickyTabBarController.h into your AppDelegate (it's named because you can be picky about which view controllers rotate and which don't; get it?).
+
+NOTE: Version 1.0 assumes that each of your view controllers are rooted in a navigation controller, such as in the above view hierarchy example. If you just have UIViewControllers inside of your UITabBarController, you will need to make some changes to this subclass. I intend to make appropriate changes in a future version

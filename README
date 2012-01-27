@@ -1,6 +1,6 @@
 Version 1.0:
 
-This class is a very simple subclass of UITabBarController. The impetus behind this class arose when I was working on a project in which I needed a view hierarchy such as this:
+This class is a very simple subclass of UITabBarController. Simply replace Apple's stock UITabBarController with an instance of PickyTabBarController, and configure in your individual UIViewControllers which orientations you want to allow. The impetus behind this class arose when I was working on a project in which I needed a view hierarchy such as this:
 
 UITabBarController
 	- UINavigationController

@@ -17,7 +17,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        // We need to initialize the selected index, otherwise 4.x versions of iOS will crash
+        self.selectedIndex = 0;
     }
     return self;
 }
@@ -58,15 +59,13 @@
 {
     // Let's grab an array of all of the child view controllers of this tab bar controller
     // This has at most 5 items
-    NSArray *childVCArray = self.childViewControllers;
+    NSArray *childVCArray = self.viewControllers;
     
     // We know that at 5 or more tabs, we get a "More" tab for free, which contains, assumingly,
     // a more navigation controller
-
-    UINavigationController *navController;
     
     if (self.selectedIndex <= 3) {
-        navController = [childVCArray objectAtIndex:self.selectedIndex];
+        UINavigationController *navController = [childVCArray objectAtIndex:self.selectedIndex];
         
         // We're in one of the first three tabs, which we know have a top view controller of UIViewController
         UIViewController *viewController = navController.topViewController;
@@ -74,10 +73,9 @@
         return [viewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     }
     else {
-        // This will give us a More Navigation Controller, which is still a navigation controller
-        navController = [childVCArray objectAtIndex:4];
+        // This will give us a More Navigation Controller
         
-        UIViewController *viewController = navController.topViewController;
+        UIViewController *viewController = [childVCArray objectAtIndex:self.selectedIndex];
 
         return [viewController shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     }
